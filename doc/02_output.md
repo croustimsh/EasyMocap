@@ -85,11 +85,25 @@ To export the SMPL results to bvh file, you need to download the SMPL-maya model
     │   └── SMPL_maya_plugin_v1.0.2.py
     └── smplx
 ```
-The Blender is also needed. The `<path_to_output_smpl>` is usually `${out}/smpl`, which contanis the `000000.json, ...` of SMPL parameters.
+Blender is also needed. (version 2.79)
+ The `<path_smpl_json_files>` is usually `${out}/smpl`, which contanis the `000000.json, ...` of SMPL parameters.
+ ```bash
+└── smpl
+    ├── detect
+    ├── keypoints3d
+    ├── ...
+    ├── smpl ("<path_smpl_json_files>" should point here)
+    └── exp.yml
+```
 ```bash
 BLENDER_PATH=<path_to_blender>/blender-2.79a-linux-glibc219-x86_64
-${BLENDER_PATH}/blender -b -t 12 -P scripts/postprocess/convert2bvh.py -- <path_to_output_smpl> --o <output_path>
+${BLENDER_PATH}/blender -b -t 12 -P scripts/postprocess/convert2bvh.py -- <path_smpl_json_files> --o <bvh_output_path>
 ```
+On Windows:
+```bash
+${BLENDER_PATH}/blender.exe -b -t 12 -P scripts/postprocess/convert2bvh.py -- <path_smpl_json_files> --o <bvh_output_path>
+```
+
 We have not implement the export of SMPL+H, SMPL-X model yet. If you are interested on it, feel free to create a pull request to us.
 
 -----
@@ -117,5 +131,9 @@ We have not implement the export of SMPL+H, SMPL-X model yet. If you are interes
 这里使用Blender进行导出，测试的Blender版本为2.79。需要先下载SMPL的fbx模型
 ```bash
 BLENDER_PATH=<path_to_blender>/blender-2.79a-linux-glibc219-x86_64
-${BLENDER_PATH}/blender -b -t 12 -P scripts/postprocess/convert2bvh.py -- <path_to_output_smpl> --o <path_to_bvh>
+${BLENDER_PATH}/blender -b -t 12 -P scripts/postprocess/convert2bvh.py -- <path_smpl_json_files> --o <bvh_output_path>
+```
+On Windows:
+```bash
+${BLENDER_PATH}/blender.exe -b -t 12 -P scripts/postprocess/convert2bvh.py -- <path_smpl_json_files> --o <bvh_output_path>
 ```
